@@ -34,8 +34,13 @@ import { init as viewInit } from './view';
 declare var require:(src:string)=>void;  // webpack
 require('./style.less');
 
+export enum DoctTileApiType {
+    KONTEXT = 'kontext'
+}
+
 export interface DocTileConf extends TileConf {
     apiURL:string;
+    apiType:DoctTileApiType;
     corpname:string|null; // null can be used in case subqueryMode is enabled
     fcrit:string|Array<string>;
     critLabels:LocalizedConfMsg|Array<LocalizedConfMsg>;
