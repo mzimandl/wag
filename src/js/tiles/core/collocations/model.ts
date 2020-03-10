@@ -17,7 +17,7 @@
  */
 import { Action, SEDispatcher, StatelessModel, IActionQueue } from 'kombo';
 import { Observable, of as rxOf } from 'rxjs';
-import { concatMap, map, tap, reduce } from 'rxjs/operators';
+import { concatMap, map, tap, reduce, timeout } from 'rxjs/operators';
 import { List, HTTP } from 'cnc-tskit';
 
 import { AppServices } from '../../../appServices';
@@ -157,6 +157,7 @@ export class CollocModel extends StatelessModel<CollocModelState> {
                         return syncData;
 
                     }).pipe(
+                        this.waitForTilesTimeoutSecs ? timeout(this.waitForTilesTimeoutSecs * 1000) : tap(),
                         concatMap(action => {
                             const payload = action.payload as ConcLoadedPayload;
                             return rxOf(...List.map<string, FreqRequestArgs>((v, i) => [i, state.queryMatches[i], v], payload.concPersistenceIDs))

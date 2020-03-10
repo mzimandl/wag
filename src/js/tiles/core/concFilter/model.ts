@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { map, concatMap, reduce, tap } from 'rxjs/operators';
+import { map, concatMap, reduce, tap, timeout } from 'rxjs/operators';
 import { of as rxOf } from 'rxjs';
 import { StatelessModel, Action, SEDispatcher, IActionQueue } from 'kombo';
 
@@ -69,6 +69,7 @@ interface SingleQueryFreqArgs {
 export interface ConcFilterModelArgs {
     tileId:number;
     waitForTiles:Array<number>;
+    waitForTilesTimeoutSecs:number;
     subqSourceTiles:Array<number>;
     dispatcher:IActionQueue;
     appServices:AppServices;
@@ -91,11 +92,13 @@ export class ConcFilterModel extends StatelessModel<ConcFilterModelState, TileWa
 
     private readonly waitForTiles:Array<number>;
 
+    private readonly waitForTilesTimeoutSecs:number;
+
     private readonly subqSourceTiles:Array<number>;
 
     private readonly lemmas:RecognizedQueries;
 
-    constructor({dispatcher, tileId, waitForTiles, subqSourceTiles, appServices, api, switchMainCorpApi, initState, lemmas}:ConcFilterModelArgs) {
+    constructor({dispatcher, tileId, waitForTiles, waitForTilesTimeoutSecs, subqSourceTiles, appServices, api, switchMainCorpApi, initState, lemmas}:ConcFilterModelArgs) {
         super(dispatcher, initState);
         this.tileId = tileId;
         this.api = api;
@@ -104,6 +107,7 @@ export class ConcFilterModel extends StatelessModel<ConcFilterModelState, TileWa
         this.subqSourceTiles = [...subqSourceTiles];
         this.appServices = appServices;
         this.lemmas = lemmas;
+        this.waitForTilesTimeoutSecs = waitForTilesTimeoutSecs;
 
         this.addActionHandler<GlobalActions.RequestQueryResponse>(
             GlobalActionName.RequestQueryResponse,
@@ -363,6 +367,7 @@ export class ConcFilterModel extends StatelessModel<ConcFilterModelState, TileWa
             }
 
         ).pipe(
+            this.waitForTilesTimeoutSecs ? timeout(this.waitForTilesTimeoutSecs * 1000) : tap(),
             reduce(
                 (acc, action) => {
                     const ans = {...acc};
