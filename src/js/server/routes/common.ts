@@ -37,12 +37,22 @@ import { ErrPageProps } from '../../views/error';
 import { TileGroup } from '../../layout';
 
 
+function isTypedList(value:any, type:string):value is string[] {
+    if (value instanceof Array) {
+        let isTyped = true;
+        value.forEach(item => {if (typeof item !== type) {isTyped = false}});
+        return isTyped
+    }
+    return false
+}
+
+
 export function queryValues(req:Request, name:string, dflt?:string):Array<string> {
     const val = req.query[name];
     if (typeof val === 'string') {
         return [val];
 
-    } else if (Array.isArray(val)) {
+    } else if (isTypedList(val, 'string')) {
         return List.map(v => v + '', val);
     }
     return typeof dflt !== 'undefined' ? [dflt] : [];
