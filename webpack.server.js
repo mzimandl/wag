@@ -47,8 +47,18 @@ module.exports = (env) => ({
                 exclude: /(node_modules)/,
                 use: [
                     {
-                        loader: 'babel-loader',
-                        options: build.createBabelOptions('development')
+                        loader: 'swc-loader',
+                        options: {
+                            jsc: {
+                                parser: {
+                                    syntax: 'typescript',
+                                    tsx: true,
+                                    decorators: false,
+                                    dynamicImport: false
+                                },
+                                target: 'es2016'
+                            }
+                        }
                     }
                 ]
             }

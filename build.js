@@ -104,28 +104,4 @@ module.exports.loadConf = (path) => {
     return JSON.parse(fs.readFileSync(path));
 };
 
-
-module.exports.createBabelOptions = (env) => {
-    return {
-        presets: [
-            ["@babel/env", { modules: false }],
-            "@babel/react",
-            "@babel/typescript"
-        ],
-        plugins: [
-            [
-                "babel-plugin-styled-components",
-                {
-                    ssr: true,
-                    displayNames: env === 'development'
-                }
-            ],
-            "@babel/proposal-class-properties",
-            "@babel/proposal-object-rest-spread",
-            "@babel/plugin-syntax-dynamic-import",
-            "babel-plugin-dynamic-import-webpack"
-        ]
-    };
-};
-
 })(module);
