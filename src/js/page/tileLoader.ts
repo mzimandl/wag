@@ -77,9 +77,8 @@ export const mkTileFactory = (
     domain1:string,
     domain2:string,
     tileIdentMap:{[ident:string]:number},
-    cache:IAsyncKeyValueStore) => (
-            confName:string,
-            conf:TileConf):ITileProvider|null => {
+    cache:IAsyncKeyValueStore
+) => (confName:string, conf:TileConf):ITileProvider|null => {
 
         if (conf.isDisabled || !layoutManager.isInCurrentLayout(queryType, tileIdentMap[confName])) {
             return new EmptyTile(tileIdentMap[confName]);

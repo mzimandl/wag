@@ -23,6 +23,7 @@ import { GlobalComponents } from '../views/common';
 import { Theme } from './theme';
 import { IAppServices } from '../appServices';
 import { HTTP } from 'cnc-tskit';
+import { RequestHandler } from 'express';
 
 
 export interface Backlink {
@@ -258,6 +259,8 @@ export interface ITileProvider {
     supportsMultiWordQueries():boolean;
 
     getIssueReportingUrl():string|null;
+
+    getTileRoutes():{[path:string]:RequestHandler};
 }
 
 /**

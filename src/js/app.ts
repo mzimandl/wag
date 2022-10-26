@@ -21,6 +21,7 @@
  * server and client applications
  */
 import * as React from 'react';
+import { Express } from 'express';
 import { Observable } from 'rxjs';
 import { Theme } from './page/theme';
 import { ScreenProps } from './page/hostPage';
@@ -237,4 +238,34 @@ export function createRootComponent({config, userSession, queryMatches, appServi
     );
 
     return [component, layoutManager.getLayoutGroups(qType), tilesMap];
+}
+
+export function createTileRoutes(app:Express, {config, userSession, queryMatches, appServices, dispatcher,
+    onResize, viewUtils, cache}:InitIntArgs) {
+    const tiles:Array<ITileProvider> = [];
+    const tilesMap = attachNumericTileIdents(config.tiles);
+    const layoutManager = new LayoutManager(config.layouts, tilesMap, appServices);
+    const theme = new Theme(config.colors);
+    const qType = userSession.queryType as QueryType; // TODO validate
+    const factory = mkTileFactory(
+        dispatcher,
+        viewUtils,
+        queryMatches,
+        appServices,
+        theme,
+        layoutManager,
+        qType,
+        userSession.query1Domain,
+        userSession.query2Domain,
+        tilesMap,
+        cache
+    );
+
+    Dict.forEach(
+        (tileConf, tileId) => {
+            const tile = factory(tileId, tileConf);
+            Dict.forEach((action, path) => app.get(path, action),tile.getTileRoutes());
+        },
+        config.tiles
+    );
 }
