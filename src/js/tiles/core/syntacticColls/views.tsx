@@ -376,7 +376,7 @@ export function init(
                                                     <ScollexTable key={`scollex:${qType}:${i}`}
                                                         tileId={props.tileId} qType={qType} data={state.data}
                                                         isMobile={props.isMobile} widthFract={props.widthFract} /> :
-                                                    <WSSTable  key={`wss:${qType}:${i}`} tileId={props.tileId} qType={qType} data={state.data}
+                                                    <WSSTable key={`wss:${qType}:${i}`} tileId={props.tileId} qType={qType} data={state.data}
                                                         isMobile={props.isMobile} widthFract={props.widthFract} />,
                                                 state.displayTypes
                                             )}
