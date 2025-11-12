@@ -138,14 +138,20 @@ export function mkRuntimeClientConf({
                     appServices
                         .importExternalText(item.contents, loadFile)
                         .pipe(
-                            map<string, { label: string; html: string }>(
-                                (value) => ({
-                                    label: appServices.importExternalMessage(
-                                        item.label
-                                    ),
-                                    html: value,
-                                })
-                            )
+                            map<
+                                string,
+                                {
+                                    label: string;
+                                    html: string;
+                                    isModal: boolean;
+                                }
+                            >((value) => ({
+                                label: appServices.importExternalMessage(
+                                    item.label
+                                ),
+                                html: value,
+                                isModal: item.isModal || false,
+                            }))
                         ),
                 conf.homepage.tiles
             )

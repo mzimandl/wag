@@ -181,6 +181,7 @@ export interface LayoutsConfig {
 export interface HomePageTileConfI18n {
     label: { [lang: string]: string };
     contents: { [lang: string]: string | { file: string } };
+    isModal?: boolean;
 }
 
 export interface HomepageConfI18n {
@@ -318,6 +319,7 @@ export function isTileDBConf(tiles: MultiSourceTileConf): tiles is TileDbConf {
 export interface HomepageTileConf {
     label: string;
     html: string;
+    isModal: boolean;
 }
 
 /**

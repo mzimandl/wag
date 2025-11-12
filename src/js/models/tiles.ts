@@ -51,6 +51,7 @@ export interface WdglanceTilesState {
     activeSourceInfo: SourceDetails | null;
     activeGroupHelp: { html: string; idx: number } | null;
     activeTileHelp: { html: string; ident: number } | null;
+    activeInfoModal: { label: string; html: string } | null;
     showAmbiguousResultHelp: boolean;
     datalessGroups: Array<number>;
     tileResultFlags: Array<TileResultFlagRec>;
@@ -240,6 +241,17 @@ export class WdglanceTilesModel extends StatelessModel<WdglanceTilesState> {
 
         this.addActionHandler(Actions.HideTileHelp, (state, action) => {
             state.activeTileHelp = null;
+        });
+
+        this.addActionHandler(Actions.ShowInfoModal, (state, action) => {
+            state.activeInfoModal = {
+                label: action.payload.label,
+                html: action.payload.html,
+            };
+        });
+
+        this.addActionHandler(Actions.HideInfoModal, (state, action) => {
+            state.activeInfoModal = null;
         });
 
         this.addActionHandler(Actions.GetSourceInfo, (state, action) => {

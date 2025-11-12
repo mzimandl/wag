@@ -54,6 +54,7 @@ import {
 } from './streaming.js';
 import { callWithExtraVal } from '../api/util.js';
 import { DataApi } from '../types.js';
+import { initializeSharedObject } from './shared.js';
 
 interface MountArgs {
     userSession: UserConf;
@@ -137,6 +138,8 @@ export function initClient(
     queryMatches: RecognizedQueries
 ) {
     const dispatcher = new ActionDispatcher();
+    initializeSharedObject(dispatcher);
+
     const notifications = new SystemNotifications(dispatcher);
     const uiLangSel = userSession.uiLang || 'en-US';
     const viewUtils = new ViewUtils<GlobalComponents>({

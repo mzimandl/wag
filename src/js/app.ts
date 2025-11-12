@@ -259,6 +259,7 @@ export function createRootComponent({
             activeSourceInfo: null,
             activeGroupHelp: null,
             activeTileHelp: null,
+            activeInfoModal: null,
             showAmbiguousResultHelp: false,
             maxTileErrors: config.maxTileErrors,
             numTileErrors: 0,

@@ -1688,6 +1688,12 @@ export function init(
             });
         };
 
+        const handleCloseInfoModal = () => {
+            dispatcher.dispatch<typeof Actions.HideInfoModal>({
+                name: Actions.HideInfoModal.name,
+            });
+        };
+
         const renderModal = () => {
             if (state.activeSourceInfo !== null) {
                 return (
@@ -1755,6 +1761,15 @@ export function init(
                             'global__redirecting_to_extrenal_page'
                         )}
                         content={state.redirectingMessage}
+                    />
+                );
+            } else if (state.activeInfoModal !== null) {
+                return (
+                    <ModalHelpContent
+                        onClose={handleCloseInfoModal}
+                        title={state.activeInfoModal.label}
+                        html={state.activeInfoModal.html}
+                        isBusy={false}
                     />
                 );
             } else {

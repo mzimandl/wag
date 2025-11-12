@@ -22,13 +22,19 @@ import { resolve as urlResolve } from 'url';
 
 import { HostPageEnv, AvailableLanguage } from '../../page/hostPage.js';
 import { RecognizedQueries } from '../../query/index.js';
-import { ClientConf, UserConf, ColorThemeIdent } from '../../conf/index.js';
+import {
+    ClientConf,
+    UserConf,
+    ColorThemeIdent,
+    HomepageTileConf,
+} from '../../conf/index.js';
 import { TileGroup } from '../../page/layout.js';
 import { GlobalComponents } from '../common/index.js';
 import { WdglanceMainProps } from '../main.js';
 import { ErrPageProps } from '../error.js';
 import { List, pipe } from 'cnc-tskit';
 import { Theme } from '../../page/theme.js';
+import { getSharedObject } from '../../page/shared.js';
 
 export interface HtmlBodyProps {
     config: ClientConf;
@@ -139,6 +145,35 @@ export function init(
         </section>
     );
 
+    // --------- <ThemeMenu /> -------------------------
+
+    const InfoMenu: React.FC<{
+        infoTiles: Array<HomepageTileConf>;
+    }> = (props) => {
+        console.log('InfoMenu props', props);
+
+        const handleClick = (label: string, html: string) => () => {
+            getSharedObject().displayInfoModal(label, html);
+        };
+
+        return (
+            <section>
+                {pipe(
+                    props.infoTiles,
+                    List.filter((x) => x.isModal),
+                    List.map((tile, idx) => (
+                        <button
+                            role="button"
+                            onClick={handleClick(tile.label, tile.html)}
+                        >
+                            {tile.label}
+                        </button>
+                    ))
+                )}
+            </section>
+        );
+    };
+
     // -------- <CustomFooter /> ----------------------
 
     const CustomFooter: React.FC<{
@@ -160,6 +195,7 @@ export function init(
                 themes={props.themes}
                 currTheme={props.currTheme}
             />
+            <InfoMenu infoTiles={props.config.homepage.tiles} />
             <section className="project-info">
                 <span>
                     {ut.translate('global__powered_by_wag_{version}', {
@@ -192,6 +228,7 @@ export function init(
                 themes={props.themes}
                 currTheme={props.currTheme}
             />
+            <InfoMenu infoTiles={props.config.homepage.tiles} />
             <section className="project-info">
                 <span className="copy">
                     &copy;{' '}

@@ -301,6 +301,17 @@ export class Actions {
         name: 'MAIN_HIDE_QUERY_MATCH_MODAL',
     };
 
+    static ShowInfoModal: Action<{
+        label: string;
+        html: string;
+    }> = {
+        name: 'MAIN_SHOW_INFO_MODAL',
+    };
+
+    static HideInfoModal: Action<{}> = {
+        name: 'MAIN_HIDE_INFO_MODAL',
+    };
+
     static SelectModalQueryMatch: Action<{
         queryIdx: number;
         variantIdx: number;
