@@ -318,6 +318,7 @@ export class KorpusFreqDB implements IFreqDB {
                             {
                                 word,
                                 lemma,
+                                sublemma: undefined, // TODO
                                 pos,
                                 upos: [], // TODO
                                 ipm: 0,
@@ -412,6 +413,7 @@ export class KorpusFreqDB implements IFreqDB {
                                         {
                                             word: curr._name,
                                             lemma: lemma,
+                                            sublemma: undefined, // TODO
                                             pos: pos,
                                             upos: [], // TODO
                                             ipm: ipm,

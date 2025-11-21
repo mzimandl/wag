@@ -85,6 +85,16 @@ export function init(
                                                                 {w.lemma}
                                                             </strong>
                                                         </dd>
+                                                        {w.sublemma ? (
+                                                            <>
+                                                                <dt>
+                                                                    sublemma
+                                                                </dt>
+                                                                <dd>
+                                                                    {w.sublemma}
+                                                                </dd>
+                                                            </>
+                                                        ) : null}
                                                         <dt>
                                                             {ut.translate(
                                                                 'wordfreq__pos'

@@ -13,6 +13,10 @@ interface HTTPNgramDoc {
     _id: string;
     _rev: string;
     lemma: string;
+    sublemmas: Array<{
+        value: string;
+        count: number;
+    }>;
     pos: string;
     upos: string;
     count: number;
@@ -50,6 +54,20 @@ export class FrodoClient implements IFreqDB {
         this.apiServices = apiServices;
     }
 
+    private selectSublemma(
+        lemma: string,
+        sublemmas: Array<{ value: string; count: number }>
+    ): string {
+        if (List.size(sublemmas) === 1) {
+            return sublemmas[0].value;
+        }
+        const sl = List.find((v) => v.value === lemma, sublemmas);
+        if (sl) {
+            return sl.value;
+        }
+        return undefined;
+    }
+
     findQueryMatches(
         appServices: IAppServices,
         word: string,
@@ -66,6 +84,7 @@ export class FrodoClient implements IFreqDB {
                     (v) => ({
                         word,
                         lemma: v.lemma,
+                        sublemma: this.selectSublemma(v.lemma, v.sublemmas),
                         pos: importQueryPosWithLabel(v.pos, 'pos', appServices),
                         upos: v.upos
                             ? importQueryPosWithLabel(
@@ -112,6 +131,7 @@ export class FrodoClient implements IFreqDB {
                     (v) => ({
                         word: '-',
                         lemma: v.lemma,
+                        sublemma: this.selectSublemma(v.lemma, v.sublemmas),
                         pos: importQueryPosWithLabel(v.pos, 'pos', appServices),
                         upos: importQueryPosWithLabel(
                             v.upos,

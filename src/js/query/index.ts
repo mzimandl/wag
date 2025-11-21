@@ -96,6 +96,7 @@ export function calcFreqBand(ipm: number): FreqBand {
 
 export interface QueryMatchCore {
     lemma: string; // space-based value for a multi-word query
+    sublemma: string; // optional sublemma info
     pos: Array<PosItem>; // each word of a multi-word query
     upos: Array<PosItem>; // each word of a multi-word query
     ipm: number;
@@ -129,6 +130,7 @@ export function findCurrQueryMatch(
         ? srch
         : {
               lemma: undefined,
+              sublemma: undefined,
               word: undefined,
               pos: [],
               upos: [],
@@ -186,6 +188,7 @@ export function addWildcardMatches(qm: Array<QueryMatch>): Array<QueryMatch> {
             if (matches.length > 1) {
                 const wildCard: QueryMatch = {
                     lemma: matches[0].lemma,
+                    sublemma: matches[0].sublemma,
                     pos: [],
                     upos: [],
                     ipm: List.foldl((acc, m) => acc + m.ipm, 0, matches),

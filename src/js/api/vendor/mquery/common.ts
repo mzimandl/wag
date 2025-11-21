@@ -45,6 +45,17 @@ export function mkLemmaMatchQuery(
     generator: [string, string]
 ): string {
     const fn = posQueryFactory(generator[1]);
+    if (lvar.sublemma) {
+        return pipe(
+            lvar.lemma.split(' '),
+            List.zip(lvar.sublemma.split(' ')),
+            List.map(([lemma, sublemma], i) =>
+                lvar.pos[i] !== undefined
+                    ? `[lemma=="${escapeDQuotes(lemma)}" & ${generator[0]}="${fn(lvar.pos[i].value)}" & sublemma=="${escapeDQuotes(sublemma)}"]`
+                    : `[lemma=="${escapeDQuotes(lemma)}" & sublemma=="${escapeDQuotes(sublemma)}"]`
+            )
+        ).join(' ');
+    }
     return pipe(
         lvar.lemma.split(' '),
         List.map((lemma, i) =>
