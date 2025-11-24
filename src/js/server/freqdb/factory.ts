@@ -34,15 +34,26 @@ export function createInstance(
     connPath: string,
     corpusSize: number,
     apiServices: IApiServices,
-    options: FreqDbOptions
+    options: FreqDbOptions,
+    handleSublemata: boolean
 ): IFreqDB {
     switch (dbType) {
         case FreqDBType.COUCHDB:
             return new CouchFreqDB(connPath, corpusSize, apiServices, options);
         case FreqDBType.KORPUSDB:
-            return new KorpusFreqDB(connPath, apiServices, options);
+            return new KorpusFreqDB(
+                connPath,
+                apiServices,
+                options,
+                handleSublemata
+            );
         case FreqDBType.FRODO:
-            return new FrodoClient(connPath, corpusSize, apiServices);
+            return new FrodoClient(
+                connPath,
+                corpusSize,
+                apiServices,
+                handleSublemata
+            );
         default:
             throw new Error(`Frequency database ${dbType} is not supported`);
     }

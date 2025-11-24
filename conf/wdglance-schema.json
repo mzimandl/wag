@@ -350,6 +350,9 @@
                     },
                     "type": "object"
                 },
+                "isFooterIntegrated": {
+                    "type": "boolean"
+                },
                 "label": {
                     "additionalProperties": {
                         "type": "string"
@@ -974,9 +977,6 @@
                 }
             ]
         },
-        "corpInfoApiUrl": {
-            "type": "string"
-        },
         "dataReadability": {
             "anyOf": [
                 {
@@ -1079,7 +1079,6 @@
     "required": [
         "apiHeaders",
         "applicationId",
-        "corpInfoApiUrl",
         "dataStreamingUrl",
         "homepage",
         "hostUrl",

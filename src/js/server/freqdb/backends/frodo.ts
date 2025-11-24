@@ -48,10 +48,18 @@ export class FrodoClient implements IFreqDB {
 
     private readonly corpusSize: number;
 
-    constructor(apiURL: string, corpusSize: number, apiServices: IApiServices) {
+    private readonly handleSublemata: boolean;
+
+    constructor(
+        apiURL: string,
+        corpusSize: number,
+        apiServices: IApiServices,
+        handleSublemata: boolean
+    ) {
         this.apiURL = apiURL;
         this.corpusSize = corpusSize;
         this.apiServices = apiServices;
+        this.handleSublemata = handleSublemata;
     }
 
     private selectSublemma(
@@ -84,7 +92,9 @@ export class FrodoClient implements IFreqDB {
                     (v) => ({
                         word,
                         lemma: v.lemma,
-                        sublemma: this.selectSublemma(v.lemma, v.sublemmas),
+                        sublemma: this.handleSublemata
+                            ? this.selectSublemma(v.lemma, v.sublemmas)
+                            : undefined,
                         pos: importQueryPosWithLabel(v.pos, 'pos', appServices),
                         upos: v.upos
                             ? importQueryPosWithLabel(
@@ -131,7 +141,9 @@ export class FrodoClient implements IFreqDB {
                     (v) => ({
                         word: '-',
                         lemma: v.lemma,
-                        sublemma: this.selectSublemma(v.lemma, v.sublemmas),
+                        sublemma: this.handleSublemata
+                            ? this.selectSublemma(v.lemma, v.sublemmas)
+                            : undefined,
                         pos: importQueryPosWithLabel(v.pos, 'pos', appServices),
                         upos: importQueryPosWithLabel(
                             v.upos,

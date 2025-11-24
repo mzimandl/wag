@@ -570,4 +570,5 @@ export interface ServerConf {
         secret?: string;
     };
     CSPDomains?: Array<string>;
+    handleSublemmata?: boolean;
 }
