@@ -53,6 +53,7 @@ export interface ConcordanceTileConf extends CorpSrchTileConf {
     parallelLangMapping?: { [lang: string]: string };
     disableViewModes?: boolean;
     metadataAttrs?: Array<{ value: string; label: LocalizedConfMsg }>;
+    supportsSublemma?: boolean;
 }
 
 /**
@@ -137,6 +138,7 @@ export class ConcordanceTile implements ITileProvider {
                 })),
                 backlinks: List.map((_) => null, queryMatches),
                 posQueryGenerator: conf.posQueryGenerator,
+                supportsSublemma: conf.supportsSublemma || false,
                 disableViewModes: false, // TODO change in case aligned conc. are supported
                 visibleMetadataLine: -1,
                 queries: List.map(

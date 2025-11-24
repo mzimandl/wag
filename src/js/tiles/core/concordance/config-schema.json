@@ -71,6 +71,9 @@
                 ]
             }
         },
+        "supportsSublemma": {
+            "type": "boolean"
+        },
         "corpname": {
             "type": "string"
         },

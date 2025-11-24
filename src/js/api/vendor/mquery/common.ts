@@ -42,10 +42,11 @@ function escapeDQuotes(v: string): string {
  */
 export function mkLemmaMatchQuery(
     lvar: QueryMatch,
-    generator: [string, string]
+    generator: [string, string],
+    supportsSublemma?: boolean
 ): string {
     const fn = posQueryFactory(generator[1]);
-    if (lvar.sublemma) {
+    if (supportsSublemma && lvar.sublemma) {
         return pipe(
             lvar.lemma.split(' '),
             List.zip(lvar.sublemma.split(' ')),
