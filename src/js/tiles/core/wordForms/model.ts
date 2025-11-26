@@ -154,6 +154,7 @@ export class WordFormsModel extends StatelessModel<WordFormsModelState> {
                     this.fetchWordForms(
                         {
                             lemma: variant.lemma,
+                            sublemma: variant.sublemma,
                             pos: List.map((v) => v.value, variant.pos),
                             corpName: state.corpname,
                             mainPosAttr: state.mainPosAttr,
@@ -237,6 +238,7 @@ export class WordFormsModel extends StatelessModel<WordFormsModelState> {
                 const variant = findCurrQueryMatch(this.queryMatches[0]);
                 const args = {
                     lemma: variant.lemma,
+                    sublemma: variant.sublemma,
                     pos: List.map((v) => v.value, variant.pos),
                     corpName: state.corpname,
                     mainPosAttr: state.mainPosAttr,

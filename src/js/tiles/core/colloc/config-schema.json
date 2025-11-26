@@ -51,7 +51,7 @@
             "minItems": 2,
             "maxItems": 2
         },
-        "supportSublemma": {
+        "supportsSublemma": {
             "type": "boolean"
         },
         "tileType": {

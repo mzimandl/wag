@@ -63,11 +63,15 @@ export class FrodoWordFormsAPI
             'search',
             args.lemma
         );
+        let query = `pos=${encodeURIComponent(args.pos.join(' '))}`;
+        if (this.supportsSublemma) {
+            query += `&sublemma=${encodeURIComponent(args.sublemma)}`;
+        }
         return streaming
             .registerTileRequest<FrodoResponse>({
                 tileId,
                 method: HTTP.Method.GET,
-                url: url + `?pos=${encodeURIComponent(args.pos.join(' '))}`,
+                url: url + `?${query}`,
                 body: {},
                 contentType: 'application/json',
             })

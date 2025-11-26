@@ -39,6 +39,7 @@ export class MQueryWordFormsAPI
         return pipe(
             {
                 lemma: queryArgs.lemma,
+                sublemma: this.supportsSublemma ? queryArgs.sublemma : '',
                 pos: queryArgs.pos.join(' '),
             },
             Dict.toEntries(),

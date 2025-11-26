@@ -37,17 +37,21 @@ export class WordFormsBacklinkAPI {
 
     protected readonly posQueryGenerator: PosQueryGeneratorType;
 
+    protected readonly supportsSublemma: boolean;
+
     constructor(
         apiURL: string,
         apiServices: IApiServices,
         posQueryGenerator: PosQueryGeneratorType,
-        backlinkConf: BacklinkConf
+        backlinkConf: BacklinkConf,
+        supportsSublemma: boolean
     ) {
         this.apiURL = apiURL;
         this.apiServices = apiServices;
         this.srcInfoService = new CorpusInfoAPI(apiURL, apiServices);
         this.backlinkConf = backlinkConf;
         this.posQueryGenerator = posQueryGenerator;
+        this.supportsSublemma = supportsSublemma;
     }
 
     requestBacklink(
@@ -56,7 +60,7 @@ export class WordFormsBacklinkAPI {
     ): Observable<URL> {
         const concArgs = {
             corpname: args.corpName,
-            q: `q${mkLemmaMatchQuery(queryMatch, this.posQueryGenerator)}`,
+            q: `q${mkLemmaMatchQuery(queryMatch, this.posQueryGenerator, this.supportsSublemma)}`,
             format: 'json',
         };
         return ajax$<{ conc_persistence_op_id: string }>(

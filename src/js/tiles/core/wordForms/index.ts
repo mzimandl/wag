@@ -47,6 +47,7 @@ export interface WordFormsTileConf extends TileConf {
     corpusSize: number;
     freqFilterAlphaLevel: Maths.AlphaLevel;
     posQueryGenerator: PosQueryGeneratorType;
+    supportsSublemma?: boolean;
 }
 
 export class WordFormsTile implements ITileProvider {
@@ -112,14 +113,16 @@ export class WordFormsTile implements ITileProvider {
                     conf.apiURL,
                     appServices,
                     conf.posQueryGenerator,
-                    conf.backlink
+                    conf.backlink,
+                    conf.supportsSublemma || false
                 );
             case CoreApiGroup.FRODO:
                 return new FrodoWordFormsAPI(
                     conf.apiURL,
                     appServices,
                     conf.posQueryGenerator,
-                    conf.backlink
+                    conf.backlink,
+                    conf.supportsSublemma || false
                 );
             case CoreApiGroup.KORPUS_DB:
             default:
