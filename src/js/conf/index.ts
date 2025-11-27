@@ -526,6 +526,7 @@ export interface WordDbConf {
     minLemmaFreq: number;
     database: FreqDbConf;
     similarFreqWordsMaxCtx: number;
+    handleSublemmata?: boolean;
 }
 
 export interface LangCookieSetup {
@@ -570,5 +571,4 @@ export interface ServerConf {
         secret?: string;
     };
     CSPDomains?: Array<string>;
-    handleSublemmata?: boolean;
 }

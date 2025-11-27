@@ -121,13 +121,13 @@ export class KorpusFreqDB implements IFreqDB {
      */
     private resourcesCache: HTTPResourcesResponse | null;
 
-    private readonly handleSublemata: boolean;
+    private readonly handleSublemmata: boolean;
 
     constructor(
         apiUrl: string,
         apiServices: IApiServices,
         options: FreqDbOptions,
-        handleSublemata: boolean
+        handleSublemmata: boolean
     ) {
         this.apiURL = apiUrl;
         this.apiServices = apiServices;
@@ -143,7 +143,7 @@ export class KorpusFreqDB implements IFreqDB {
               )
             : undefined;
         this.resourcesCache = null;
-        this.handleSublemata = handleSublemata; // TODO
+        this.handleSublemmata = handleSublemmata; // TODO
     }
 
     private loadResources(): Observable<HTTPResourcesResponse> {

@@ -193,7 +193,7 @@ export const wdgRouter = (services: Services) => (app: Express) => {
                 services.serverConf.freqDB.database.corpusSize,
                 appServices,
                 services.serverConf.freqDB.database.options || {},
-                services.serverConf.handleSublemmata || false
+                services.serverConf.freqDB.handleSublemmata || false
             );
             observer.next(db);
             observer.complete();
@@ -504,7 +504,7 @@ export const wdgRouter = (services: Services) => (app: Express) => {
             services.serverConf.freqDB.database.corpusSize,
             appServices,
             services.serverConf.freqDB.database.options || {},
-            services.serverConf.handleSublemmata || false
+            services.serverConf.freqDB.handleSublemmata || false
         );
 
         logAction({
@@ -617,7 +617,7 @@ export const wdgRouter = (services: Services) => (app: Express) => {
                     services.serverConf.freqDB.database.corpusSize,
                     appServices,
                     services.serverConf.freqDB.database.options || {},
-                    services.serverConf.handleSublemmata || false
+                    services.serverConf.freqDB.handleSublemmata || false
                 );
                 observer.next(db);
                 observer.complete();

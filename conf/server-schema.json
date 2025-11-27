@@ -101,6 +101,9 @@
                 "database": {
                     "$ref": "#/definitions/FreqDbConf"
                 },
+                "handleSublemmata": {
+                    "type": "boolean"
+                },
                 "maxQueryWords": {
                     "type": "number"
                 },
@@ -158,9 +161,6 @@
         },
         "freqDB": {
             "$ref": "#/definitions/WordDbConf"
-        },
-        "handleSublemmata": {
-            "type": "boolean"
         },
         "import": {
             "type": "string"
