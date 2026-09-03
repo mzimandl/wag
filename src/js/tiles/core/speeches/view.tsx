@@ -295,6 +295,10 @@ export function init(
             List.map((sp, i) => tuple(sp, theme.scaleColorIndexed()(i))),
             Dict.fromEntries()
         );
+        const someSpeachDataAvailable = List.some(
+            (line) => List.some((l) => !List.empty(l.segments), line),
+            props.data || []
+        );
         const renderSpeechLines = () => {
             return (props.data || []).map((item, i) => {
                 if (item.length === 1) {
@@ -345,11 +349,13 @@ export function init(
                         ) : null}
                     </div>
                 </div>
-                <div className="play-all">
-                    <a onClick={handlePlayAllClick}>
-                        {ut.translate('speeches__play_all_btn')}
-                    </a>
-                </div>
+                {props.playbackEnabled && someSpeachDataAvailable ? (
+                    <div className="play-all">
+                        <a onClick={handlePlayAllClick}>
+                            {ut.translate('speeches__play_all_btn')}
+                        </a>
+                    </div>
+                ) : null}
                 <S.Speeches>{renderSpeechLines()}</S.Speeches>
             </div>
         );
