@@ -1645,31 +1645,9 @@ export function init(
                             <span
                                 className={`triangle${props.groupHidden ? ' right' : ''}`}
                             >
-                                {props.groupHidden ? (
-                                    <img
-                                        className="filtered"
-                                        src={ut.createStaticUrl(
-                                            'triangle_w_right.svg'
-                                        )}
-                                        alt={ut.translate(
-                                            'global__img_alt_triangle_w_right'
-                                        )}
-                                    />
-                                ) : (
-                                    <img
-                                        className="filtered"
-                                        src={ut.createStaticUrl(
-                                            'triangle_w_down.svg'
-                                        )}
-                                        alt={ut.translate(
-                                            'global__img_alt_triangle_w_down'
-                                        )}
-                                    />
-                                )}
+                                &#x25BC;
                             </span>
-                            <span className="switch">
-                                {props.group.groupLabel}
-                            </span>
+                            {props.group.groupLabel}
                         </a>
                         {props.helpClickHandler ? (
                             <a

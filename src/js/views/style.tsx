@@ -1051,17 +1051,11 @@ export const TileGroupButton = styled.section<{ theme: Theme }>`
             .triangle {
                 display: inline-block;
                 width: 1.5em;
-
-                img {
-                    width: 0.65em;
-                    vertical-align: middle;
-                    position: relative;
-                    margin-top: -0.2em;
-                }
+                vertical-align: center;
             }
 
-            .triangle.right img {
-                width: 0.5em;
+            .triangle.right {
+                writing-mode: sideways-lr;
             }
 
             .switch-common {
