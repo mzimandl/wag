@@ -150,6 +150,9 @@
                 "geoAreaSpotTextColor": {
                     "type": "string"
                 },
+                "indexBorderStyle": {
+                    "type": "string"
+                },
                 "isDefault": {
                     "type": "boolean"
                 },

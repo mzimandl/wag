@@ -105,6 +105,8 @@ export interface ColorTheme<T = any> extends ColorThemeIdent {
     queryFormButtonIconColor?: string;
     queryFormButtonIconHoverColor?: string;
 
+    indexBorderStyle?: string;
+
     extraTheme?: T;
 }
 

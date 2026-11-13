@@ -124,6 +124,8 @@ export class Theme<T = any> {
 
     public readonly queryFormButtonIconHoverColor: string;
 
+    public readonly indexBorderStyle: string;
+
     public readonly tileBackgroundColor: string | undefined;
 
     public readonly tileHeadingSeparColor: string;
@@ -301,6 +303,8 @@ export class Theme<T = any> {
             confSrc.queryFormButtonIconColor || this.colorInvertText;
         this.queryFormButtonIconHoverColor =
             confSrc.queryFormButtonIconHoverColor || this.colorLogoBlueShining;
+        this.indexBorderStyle =
+            confSrc.indexBorderStyle || this.textInputBorderStyle;
 
         this.oddDataLineBackgroundColor =
             confSrc.oddDataLineBackgroundColor ||

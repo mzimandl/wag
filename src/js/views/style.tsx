@@ -1227,7 +1227,7 @@ export const Index = styled.div<{ $maxWidth: number; theme: Theme }>`
     align-items: stretch;
     z-index: 1000;
     background-color: ${(props) => props.theme.tileBackgroundColor};
-    border: ${(props) => props.theme.textInputBorderStyle};
+    border: ${(props) => props.theme.indexBorderStyle};
     border-right: none;
     border-radius: ${(props) => props.theme.formElementsBorderRadius} 0 0
         ${(props) => props.theme.formElementsBorderRadius};
